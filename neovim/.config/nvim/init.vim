@@ -1,13 +1,12 @@
 call plug#begin('~/.vim/plugged')
 
-Plug '/usr/bin/fzf'
 Plug 'drewtempelmeyer/palenight.vim'
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'hrsh7th/nvim-compe'
-Plug 'junegunn/fzf.vim'
 Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-" Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sleuth'
@@ -47,6 +46,9 @@ let g:go_def_mapping_enabled = 0
 " Use golangci-lint as linter
 let g:go_metalinter_command = "golangci-lint"
 
+" Setup VimWiki
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+
 " Load lua configs
 lua require("config")
 
@@ -58,3 +60,9 @@ inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 inoremap <silent><expr> <TAB>     pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr>         <S-TAB>   pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" Telescop key mappings
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<CR>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<CR>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<CR>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<CR>
