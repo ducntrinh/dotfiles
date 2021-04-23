@@ -1,6 +1,7 @@
 require'lspconfig'.gopls.setup{}
 require'lspconfig'.yamlls.setup{}
 require'lspconfig'.dockerls.setup{}
+require'lspconfig'.clangd.setup{}
 
 -- Treesitter configs
 require'nvim-treesitter.configs'.setup {
