@@ -4,7 +4,7 @@ require'lspconfig'.dockerls.setup{}
 
 -- Treesitter configs
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "go", "rust" },
+  ensure_installed = { "go", "rust", "yaml" },
   highlight = {
     enable = true,
   },
