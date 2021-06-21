@@ -1,15 +1,17 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'drewtempelmeyer/palenight.vim'
+Plug 'aklt/plantuml-syntax'
+Plug 'hoob3rt/lualine.nvim'
 Plug 'hrsh7th/nvim-compe'
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'marko-cerovac/material.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'vimwiki/vimwiki'
 
@@ -21,11 +23,9 @@ set number
 " Use system clipboard
 set clipboard=unnamedplus
 
-" Use dark background
-set background=dark
-
 " Set current colorscheme
-colorscheme palenight
+let g:material_style = 'palenight'
+colorscheme material
 
 " Show more color
 set termguicolors
@@ -34,23 +34,24 @@ set termguicolors
 syntax enable
 filetype plugin indent on
 
-" Palenight customization
-let g:palenight_terminal_italics=1
-
 " Set SQL dialect to MySQL
 let g:sql_type_default='mysql'  
-
-" disable vim-go :GoDef short cut (gd) this is handled by LanguageClient [LC]
-let g:go_def_mapping_enabled = 0
-
-" Use golangci-lint as linter
-let g:go_metalinter_command = "golangci-lint"
 
 " Setup VimWiki
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
 " Load lua configs
 lua require("config")
+
+" Nvim-lspconfig key mappings
+nnoremap <silent> gd	<cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gD	<cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> gr	<cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gi	<cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> K	<cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <C-k>	<cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> <C-n>	<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> <C-p>	<cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 
 " Compe key mappings
 inoremap <silent><expr> <C-Space> compe#complete()
@@ -66,3 +67,8 @@ nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<CR>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<CR>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<CR>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<CR>
+
+" Nvim-tree key mappings
+nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>

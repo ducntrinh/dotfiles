@@ -1,7 +1,9 @@
+-- LSP configs
 require'lspconfig'.gopls.setup{}
 require'lspconfig'.yamlls.setup{}
 require'lspconfig'.dockerls.setup{}
 require'lspconfig'.clangd.setup{}
+require'lspconfig'.rust_analyzer.setup{}
 
 -- Treesitter configs
 require'nvim-treesitter.configs'.setup {
@@ -50,3 +52,13 @@ require'compe'.setup {
     omni = false;
   };
 }
+
+-- Lualine configs
+require('lualine').setup{
+  options = {
+    theme = 'material'
+  }
+}
+
+-- gitsigns configs
+require('gitsigns').setup()

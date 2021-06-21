@@ -129,6 +129,13 @@ mouse:
   # If this is `true`, the cursor is temporarily hidden when typing.
   hide_when_typing: false
 
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>"
+
+  # When set to `true`, selected text will be copied to the primary clipboard.
+  save_to_clipboard: false
+
+hints:
   url:
     # URL launcher
     #
@@ -151,11 +158,7 @@ mouse:
     # on them. The available modifiers are documented in the key binding section.
     modifiers: None
 
-selection:
-  semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
-  # When set to `true`, selected text will be copied to the primary clipboard.
-  save_to_clipboard: false
 
 # Shell
 #
