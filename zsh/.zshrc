@@ -26,7 +26,7 @@ alias dkr='docker run -it --rm -v `pwd`:`pwd` -w `pwd` --user "`id -u`:`id -g`"'
 alias foody-env='source ~/projects/Foody/venv/bin/activate'
 alias fgco='git for-each-ref --sort=-committerdate --format="%(refname:short)" refs/heads | fzf | xargs git checkout'
 alias fgm='git for-each-ref --sort=-committerdate --format="%(refname:short)" refs/heads | fzf | xargs git merge'
-alias gbdm="comm -12 <(git log --merges --oneline | sed -rn \"s/.*'(.*?)' into 'master'/\\1/p\" | sort) <(git branch --format='%(refname:short)') | xargs -r git branch -D"
+alias gbdm="comm -12 <(git log --merges --oneline | sed -rn \"s/.*'(.*?)' into 'master'/\\1/p\" | sort) <(git branch --format='%(refname:short)' | sort) | xargs -r git branch -D"
 
 # Kubectl hacks
 kexec() {
