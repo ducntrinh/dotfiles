@@ -51,6 +51,7 @@ require'lspconfig'.yamlls.setup{}
 require'lspconfig'.dockerls.setup{}
 require'lspconfig'.clangd.setup{}
 require'lspconfig'.rust_analyzer.setup{}
+require'lspconfig'.pyright.setup{}
 
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
@@ -90,10 +91,12 @@ vim.api.nvim_set_keymap('n', 'K', [[<cmd>lua vim.lsp.buf.hover()<CR>]], { norema
 vim.api.nvim_set_keymap('n', '<C-k>', [[<cmd>lua vim.lsp.buf.signature_help()<CR>]], { noremap = true, silent = true } )
 vim.api.nvim_set_keymap('n', '<C-n>', [[<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>]], { noremap = true, silent = true } )
 vim.api.nvim_set_keymap('n', '<C-p>', [[<cmd>lua vim.lsp.diagnostic.goto_next()<CR>]], { noremap = true, silent = true } )
+vim.api.nvim_set_keymap('n', '<Space>rn', [[<cmd>lua vim.lsp.buf.rename()<CR>]], { noremap = true, silent = true } )
+vim.api.nvim_set_keymap('n', '<Space>ca', [[<cmd>lua vim.lsp.buf.code_action()<CR>]], { noremap = true, silent = true } )
 
 -- Treesitter configs
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "go", "rust", "yaml", "lua" },
+  ensure_installed = { "go", "rust", "yaml", "lua", "python" },
   highlight = {
     enable = true,
   },
