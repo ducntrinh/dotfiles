@@ -39,6 +39,7 @@ vim.cmd('filetype plugin indent on')
 vim.g.sql_type_default = 'mysql'
 -- Setup VimWiki
 vim.g.vimwiki_list = {{ path = '~/vimwiki/', syntax = 'markdown', ext = '.md' }}
+vim.g.vimwiki_global_ext = 0
 
 -- Theme configs
 vim.g.material_style = 'palenight'
