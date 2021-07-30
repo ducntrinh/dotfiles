@@ -1,6 +1,7 @@
 -- Packer configs
 require('packer').startup(function()
   use 'Mofiqul/dracula.nvim'
+  use 'akinsho/nvim-toggleterm.lua'
   use 'aklt/plantuml-syntax'
   use 'hoob3rt/lualine.nvim'
   use 'hrsh7th/nvim-compe'
@@ -28,6 +29,8 @@ vim.o.number = true
 vim.o.clipboard = 'unnamedplus'
 -- Show more color
 vim.o.termguicolors = true
+-- Enable hidden buffer
+vim.o.hidden = true
 -- Enable syntax and index by plugins
 vim.cmd('syntax enable')
 vim.cmd('filetype plugin indent on')
@@ -200,3 +203,9 @@ vim.api.nvim_set_keymap('n', '<Leader>fh', [[<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap('n', '<C-n>', ":NvimTreeToggle<CR>", { noremap = true } )
 vim.api.nvim_set_keymap('n', '<Leader>r', ":NvimTreeRefresh<CR>", { noremap = true } )
 vim.api.nvim_set_keymap('n', '<Leader>n', ":NvimTreeFindFile<CR>", { noremap = true } )
+
+-- nvim-toggleterm configs
+require("toggleterm").setup{
+  direction = 'float',
+  open_mapping = [[<c-\>]],
+}
