@@ -15,7 +15,8 @@ require('packer').startup(function()
   use 'nvim-telescope/telescope.nvim'
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
+    branch = '0.5-compat',
+    run = ':TSUpdate',
   }
   use 'tpope/vim-surround'
   use 'vimwiki/vimwiki'
