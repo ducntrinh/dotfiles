@@ -73,9 +73,21 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ductn/.local/share/nvim/site/pack/packer/start/dracula.nvim"
   },
+  ["editorconfig-vim"] = {
+    loaded = true,
+    path = "/home/ductn/.local/share/nvim/site/pack/packer/start/editorconfig-vim"
+  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/home/ductn/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
+  },
+  ["go.nvim"] = {
+    loaded = true,
+    path = "/home/ductn/.local/share/nvim/site/pack/packer/start/go.nvim"
+  },
+  kommentary = {
+    loaded = true,
+    path = "/home/ductn/.local/share/nvim/site/pack/packer/start/kommentary"
   },
   ["lualine.nvim"] = {
     loaded = true,

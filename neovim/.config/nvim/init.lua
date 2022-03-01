@@ -3,6 +3,8 @@ require('packer').startup(function()
   use 'Mofiqul/dracula.nvim'
   use 'akinsho/nvim-toggleterm.lua'
   use 'aklt/plantuml-syntax'
+  use 'b3nj5m1n/kommentary'
+  use 'editorconfig/editorconfig-vim'
   use 'hoob3rt/lualine.nvim'
   use 'hrsh7th/nvim-compe'
   use 'kyazdani42/nvim-tree.lua'
@@ -18,6 +20,7 @@ require('packer').startup(function()
     branch = '0.5-compat',
     run = ':TSUpdate',
   }
+  use 'ray-x/go.nvim'
   use 'tpope/vim-surround'
   use 'vimwiki/vimwiki'
   use 'wbthomason/packer.nvim'
@@ -32,15 +35,14 @@ vim.o.clipboard = 'unnamedplus'
 vim.o.termguicolors = true
 -- Enable hidden buffer
 vim.o.hidden = true
--- Enable syntax and index by plugins
-vim.cmd('syntax enable')
-vim.cmd('filetype plugin indent on')
+-- Use spaces instead of tabs
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
 -- Set SQL dialect to MySQL
 vim.g.sql_type_default = 'mysql'
 -- Setup VimWiki
 vim.g.vimwiki_list = {{ path = '~/vimwiki/', syntax = 'markdown', ext = '.md' }}
 vim.g.vimwiki_global_ext = 0
-
 -- Theme configs
 vim.g.material_style = 'palenight'
 vim.cmd[[colorscheme dracula]]
@@ -94,11 +96,14 @@ vim.api.nvim_set_keymap('n', '<C-p>', [[<cmd>lua vim.lsp.diagnostic.goto_next()<
 vim.api.nvim_set_keymap('n', '<Space>rn', [[<cmd>lua vim.lsp.buf.rename()<CR>]], { noremap = true, silent = true } )
 vim.api.nvim_set_keymap('n', '<Space>ca', [[<cmd>lua vim.lsp.buf.code_action()<CR>]], { noremap = true, silent = true } )
 
+vim.cmd("autocmd BufWritePre (InsertLeave?) <buffer> lua vim.lsp.buf.formatting_sync(nil,500)")
+
 -- Treesitter configs
 require'nvim-treesitter.configs'.setup {
   ensure_installed = { "go", "rust", "yaml", "lua", "python" },
   highlight = {
     enable = true,
+    additional_vim_regex_highlighting = true,
   },
   incremental_selection = {
     enable = true,
@@ -206,6 +211,7 @@ vim.api.nvim_set_keymap('n', '<Leader>fb', [[<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap('n', '<Leader>fh', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], { noremap = true } )
 
 -- nvim-tree configs
+require('nvim-tree').setup()
 vim.api.nvim_set_keymap('n', '<C-n>', ":NvimTreeToggle<CR>", { noremap = true } )
 vim.api.nvim_set_keymap('n', '<Leader>r', ":NvimTreeRefresh<CR>", { noremap = true } )
 vim.api.nvim_set_keymap('n', '<Leader>n', ":NvimTreeFindFile<CR>", { noremap = true } )
@@ -215,3 +221,6 @@ require("toggleterm").setup{
   direction = 'float',
   open_mapping = [[<c-\>]],
 }
+
+-- go.nvim configs
+require('go').setup()

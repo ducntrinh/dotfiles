@@ -1,8 +1,9 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/tools:$HOME/.local/bin:$PATH
+export PATH=$HOME/tools:$HOME/.local/bin:$HOME/go/bin:$PATH
 
 # Load Zinit
-source "$HOME/.zinit/bin/zinit.zsh"
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+source "${ZINIT_HOME}/zinit.zsh"
 
 ################################
 # ZSH Core Configuration
@@ -58,9 +59,10 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # Annexes
 zinit light-mode for \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-bin-gem-node
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
 
 # Plugins
 zinit wait lucid light-mode for \
@@ -74,7 +76,7 @@ zinit wait lucid light-mode for \
     OMZP::colored-man-pages \
     OMZP::git-auto-fetch \
   atinit"zicompinit; zicdreplay" \
-    zdharma/fast-syntax-highlighting \
+    zdharma-continuum/fast-syntax-highlighting \
   atload"_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions \
   as"completion" \
