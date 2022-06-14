@@ -1,5 +1,5 @@
 -- Packer configs
-require('packer').startup(function()
+require('packer').startup(function(use)
   use 'Mofiqul/dracula.nvim'
   use 'akinsho/nvim-toggleterm.lua'
   use 'aklt/plantuml-syntax'
@@ -17,7 +17,6 @@ require('packer').startup(function()
   use 'nvim-telescope/telescope.nvim'
   use {
     'nvim-treesitter/nvim-treesitter',
-    branch = '0.5-compat',
     run = ':TSUpdate',
   }
   use 'ray-x/go.nvim'
@@ -58,9 +57,7 @@ require'lspconfig'.pyright.setup{}
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
-
 require'lspconfig'.sumneko_lua.setup {
-  cmd = { "lua-language-server", "-E", "/usr/share/lua-language-server/main.lua" };
   settings = {
     Lua = {
       runtime = {
