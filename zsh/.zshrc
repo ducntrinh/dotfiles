@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/go/bin:$PATH
+export PATH=$HOME/.rd/bin:$HOME/go/bin:$PATH
 
 # Load Zinit
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -31,22 +31,9 @@ SAVEHIST=100000
 alias vim='nvim'
 alias vi='nvim'
 alias dkr='docker run -it --rm -v `pwd`:`pwd` -w `pwd` --user "`id -u`:`id -g`"'
-alias foody-env='source ~/projects/Foody/venv/bin/activate'
 alias fgco='git for-each-ref --sort=-committerdate --format="%(refname:short)" refs/heads | fzf | xargs git checkout'
 alias fgm='git for-each-ref --sort=-committerdate --format="%(refname:short)" refs/heads | fzf | xargs git merge'
 alias gbdm="comm -12 <(git log --merges --oneline | sed -rn \"s/.*'(.*?)' into 'master'/\\1/p\" | sort) <(git branch --format='%(refname:short)' | sort) | xargs -r git branch -D"
-
-# Kubectl hacks
-kexec() {
-  local context=qa
-  if [[ "$1" != "" ]]; then
-    local context=$1
-  fi 
-
-  local pod_name=$(kubectl --context "vn."$context get pods --no-headers -o custom-columns=":metadata.name" | fzf)
-  kubectl --context "vn."$context exec -it $pod_name -- env COLUMNS=$COLUMNS LINES=$LINES TERM=$TERM bash
-}
-
 
 ################################
 # Zinit configuration
@@ -112,3 +99,7 @@ zstyle ':completion:*:*:docker-*:*' option-stacking yes
 ################################
 
 export DISABLE_AUTO_TITLE='true'
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
