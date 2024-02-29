@@ -1,5 +1,24 @@
 ---@diagnostic disable: missing-fields
 
+-- Vim configs
+-- Show line number
+vim.o.number = true
+-- Use system clipboard
+vim.o.clipboard = 'unnamedplus'
+-- Show more color
+vim.o.termguicolors = true
+-- Enable hidden buffer
+vim.o.hidden = true
+-- Use spaces instead of tabs
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+-- Set leader to Space
+vim.g.mapleader = ' '
+-- Set SQL dialect to MySQL
+vim.g.sql_type_default = 'mysql'
+-- Manually set filetype association for typst until offically support
+vim.filetype.add({ extension = { typ = 'typst' } })
+
 -- Bootstrap lazy
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -268,23 +287,6 @@ require('lazy').setup({
   'tpope/vim-surround',
 }, {})
 
--- Vim configs
--- Show line number
-vim.o.number = true
--- Use system clipboard
-vim.o.clipboard = 'unnamedplus'
--- Show more color
-vim.o.termguicolors = true
--- Enable hidden buffer
-vim.o.hidden = true
--- Use spaces instead of tabs
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
--- Set leader to Space
-vim.g.mapleader = ' '
--- Set SQL dialect to MySQL
-vim.g.sql_type_default = 'mysql'
-
 -- LSP configs
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
@@ -326,7 +328,6 @@ require('lspconfig').pyright.setup({
   capabilities = capabilities,
   on_attach = on_attach,
 })
-
 require('lspconfig').lua_ls.setup({
   settings = {
     Lua = {
@@ -345,6 +346,14 @@ require('lspconfig').lua_ls.setup({
     },
   },
   capabilities = capabilities,
+  on_attach = on_attach,
+})
+require('lspconfig').typst_lsp.setup({
+  settings = {
+    exportPdf = 'onSave', -- Choose onType, onSave or never.
+  },
+  capabilities = capabilities,
+  on_attach = on_attach,
 })
 
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { noremap = true, silent = true })
